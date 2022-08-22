@@ -8,6 +8,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class JwtApplication {
@@ -17,17 +19,17 @@ public class JwtApplication {
   }
 
   @Bean
+  PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
+
+  @Bean
   CommandLineRunner run(UserService service) {
     return args -> {
       service.saveRole(new Role(null, "ROLE_USER"));
       service.saveRole(new Role(null, "ROLE_ADMIN"));
-
-      System.out.println(service.roles());
-
       service.saveUser(new AppUser(null, "Jeet", "Jeet", "Jeet", new ArrayList<>()));
       service.addRoleToUser("ROLE_ADMIN", "Jeet");
-
-      System.out.println(service.getUser("Jeet"));
     };
   }
 }
