@@ -1,16 +1,18 @@
 package com.techwalk.jwt.service;
 
+import com.techwalk.jwt.model.AppUser;
 import com.techwalk.jwt.model.Role;
-import com.techwalk.jwt.model.User;
+import java.util.List;
 
 public interface UserService {
 
-	User saveUser(User user);
+  AppUser saveUser(AppUser user);
 
-	Role saveRole(Role role);
+  Role saveRole(Role role);
 
-	void addRoleToUser(String role, String username);
+  void addRoleToUser(String role, String username);
 
-	User getUser(String username);
+  AppUser getUser(String username);
 
+  List<Role> roles();
 }

@@ -1,11 +1,9 @@
 package com.techwalk.jwt.repo;
 
+import com.techwalk.jwt.model.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.techwalk.jwt.model.User;
+public interface UserRepo extends JpaRepository<AppUser, Long> {
 
-public interface UserRepo extends JpaRepository<User, Long>{
-	
-	User findByUsername(String username);
-
+  AppUser findByUsername(String username);
 }
